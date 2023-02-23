@@ -44,10 +44,13 @@ def test():
 
 @app.route('/api/testmodel', methods=['POST'])
 def process_form():
-    data = request.form
-    data = model.predict([[float(data['testdata'])]])  
-    data_str = ", ".join(str(x) for x in data)
-    return data_str
+    image_file=request.files['image_file']
+    image_bytes=io.BytesIO(image_file.read())
+image=Image.open(image_bytes).resize((224,224))
+image_array=np.array(image)
+data=model.predict([[image_array]])
+data_str=", ".join(str(x) for x in data)
+return data_str
 
 
 @app.route('/api/upload', methods=['POST'])
