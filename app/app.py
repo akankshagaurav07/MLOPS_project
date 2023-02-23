@@ -9,7 +9,7 @@ from sklearn.linear_model import LinearRegression
 app = Flask(__name__)
 
 # Load the pickled data and store it in a global variable
-with open('finalized_model.sav', 'rb') as f:
+with open('Face_Rec.pkl', 'rb') as f:
     model = pickle.load(f)
 
 
